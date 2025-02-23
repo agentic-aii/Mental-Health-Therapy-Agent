@@ -1,17 +1,23 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from llm import GoogleGeminiChat
+from llm import chatbot
+from langchain_core.messages import HumanMessage
 
-# Initialize FastAPI
 app = FastAPI()
-chat_model = GoogleGeminiChat()
 
-# Request model
 class ChatRequest(BaseModel):
-    message: str
+    user_input: str
+    thread_id: str  # Unique ID for each conversation session
 
-# Endpoint for AI chat
-@app.post("/chat")
+@app.post("/chat/")
 async def chat(request: ChatRequest):
-    response = chat_model.chat(request.message)
-    return {"response": response}
+    """Handles chatbot conversation requests"""
+    response = chatbot.invoke(
+        {"messages": [HumanMessage(content=request.user_input)]},
+        config={"configurable": {"thread_id": request.thread_id}}
+    )
+    return {"response": response["messages"][-1].content}
+
+@app.get("/")
+async def home():
+    return {"message": "AI Chatbot with Memory is Running!"}
