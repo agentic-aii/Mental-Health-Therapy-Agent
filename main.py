@@ -1,23 +1,39 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
-from llm import chatbot
-from langchain_core.messages import HumanMessage
-
-app = FastAPI()
-
-class ChatRequest(BaseModel):
-    user_input: str
-    thread_id: str  # Unique ID for each conversation session
-
-@app.post("/chat/")
-async def chat(request: ChatRequest):
-    """Handles chatbot conversation requests"""
-    response = chatbot.invoke(
-        {"messages": [HumanMessage(content=request.user_input)]},
-        config={"configurable": {"thread_id": request.thread_id}}
-    )
-    return {"response": response["messages"][-1].content}
-
-@app.get("/")
-async def home():
-    return {"message": "AI Chatbot with Memory is Running!"}
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "vscode": {
+     "languageId": "plaintext"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "import getpass\n",
+    "import os\n",
+    "\n",
+    "if \"GOOGLE_API_KEY\" not in os.environ:\n",
+    "    os.environ[\"GOOGLE_API_KEY\"] = getpass.getpass(\"Enter your Google AI API key: \")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "vscode": {
+     "languageId": "plaintext"
+    }
+   },
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "language_info": {
+   "name": "python"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

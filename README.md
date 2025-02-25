@@ -1,4 +1,6 @@
-Since you're developing an **AI-powered mental health companion** using **FastAPI, LangChain, Google Gemini, and Pinecone**, I'll integrate **Google AI (Gemini)** into your project properly.
+**AI-powered mental health companion** using **FastAPI, LangChain, Google Gemini, and Pinecone amd CrewAi**
+
+**first** I'll integrate **Google AI (Gemini)** into my project properly.
 
 ---
 
@@ -13,7 +15,7 @@ pip install -qU langchain-google-genai fastapi uvicorn python-dotenv
 ---
 
 #### **2️⃣ Set Up Environment Variables**
-Create a `.env` file in your project root and add:
+Create a `.env` file in my project root and add:
 ```
 GOOGLE_API_KEY=your_api_key_here
 ```
@@ -39,7 +41,7 @@ import os
 class GoogleGeminiChat:
     def __init__(self):
         self.llm = ChatGoogleGenerativeAI(
-            model="gemini-1.5-pro",
+            model="gemini-1.5-flash",
             temperature=0.7,
             max_tokens=256,
             timeout=30,
@@ -99,10 +101,13 @@ curl -X POST "http://127.0.0.1:8000/chat/?user_input=I'm feeling anxious today"
 OR  
 Use **Postman** / **VS Code REST Client** to send a POST request.
 
+i use Postman for testing
+
 ---
 
 ### **🚀 Next Steps**
-Here’s an updated version of your chatbot with memory using **LangChain's LangGraph-based memory** and **Google Generative AI (Gemini)**. It follows a structured approach with `FastAPI`, `uvicorn`, and `.env` for environment variables.  
+
+Here i update code of my chatbot with memory using **LangChain's LangGraph-based memory** and **Google Generative AI (Gemini)**. It follows a structured approach with `FastAPI`, `uvicorn`, and `.env` for environment variables.  
 
 ---
 
